@@ -150,4 +150,9 @@ def get_vector(word):
         please('please train or load a model')
         return
 
-    return w2v.get_vector(word)
+    try:
+        vector = w2v.get_vector(word)
+    except KeyError as e:
+        print(e)
+        return
+    return vector
