@@ -28,13 +28,13 @@ class Word2vec:
         return self.model.wv.vocab.keys()
 
     def graphic_words(self, words=None, sample=0):
-        if not word:
+        if not words:
             if sample > 0:
-                words = np.random.choice(list(self.model.vocab.keys()), sample)
+                words = np.random.choice(list(self.get_vocabulary()), sample)
             else:
                 words = [ word for word in model.vocab ]
         
-        word_vectors = np.array([model[w] for w in words])
+        word_vectors = np.array([self.model[w] for w in words])
 
         twodim = PCA().fit_transform(word_vectors)[:,:2]
         plt.figure(figsize=(6,6))
