@@ -45,6 +45,9 @@ class Word2vec:
         plt.show()
         return words
 
+    def get_vector(self, word):
+        return self.model[word]
+
 
 def save_model(path):
     global w2v
@@ -71,6 +74,10 @@ def train_model(corpus='cookbook', epochs=10):
 
     if not w2v:
         w2v = Word2vec()
+
+    if w2v.get_vocabulary():
+        print('you have a model already trained. Please set parameter again or load a new model.')
+        return
     w2v.train(corpus, epochs=epochs)
     return w2v.model.wv
 
@@ -86,7 +93,7 @@ def load_model(path):
     return w2v.model.wv
 
 
-def get_similar_words(word):
+def get_similar_words(word, number=10):
     global w2v
 
     if not w2v:
@@ -94,7 +101,7 @@ def get_similar_words(word):
         return
 
     try:
-        most_similar = w2v.model.wv.similar_by_word(word)
+        most_similar = w2v.model.wv.similar_by_word(word, number)
     except KeyError as e:
         print(e)
         return
@@ -134,3 +141,13 @@ def graphic_words(words=None, sample=0):
         return
 
     w2v.graphic_words(words, sample)
+
+
+def get_vector(word):
+    global w2v
+
+    if not w2v:
+        please('please train or load a model')
+        return
+
+    return w2v.get_vector(word)
