@@ -16,13 +16,13 @@ def read_zip(zipfile='text/cookbook_text.zip'):
 
 def read_file(filename='text'):
     with open(filename, 'r') as f:
-        text = f.read()
-    yield text
+        text = pre_proccess_line(f.read())
+    return text
 
 def read_files_in_directory(directory='text/shakespeare'):
     files = glob.glob(directory + '/*.txt')
     for filename in files:
-        read_file(filename)
+        yield read_file(filename)
 
 def load_corpus(corpus=''):
     global switcher
@@ -44,6 +44,6 @@ def add_corpus(corpus, path):
 
 switcher = {
     'cookbook': read_files_in_directory('text/cookbook_text'),
-    'shakespeare': read_files_in_directory(),
+    'shakespeare': read_files_in_directory('text/shakespeare'),
     'wikipedia': read_files_in_directory('text/wikipedia')
 }
