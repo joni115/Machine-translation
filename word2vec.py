@@ -33,8 +33,12 @@ class Word2vec:
                 words = np.random.choice(list(self.get_vocabulary()), sample)
             else:
                 words = [ word for word in model.vocab ]
-        
-        word_vectors = np.array([self.model[w] for w in words])
+
+        try:
+            word_vectors = np.array([self.model[w] for w in words])
+        except KeyError as e:
+            print(e)
+            return
 
         twodim = PCA().fit_transform(word_vectors)[:,:2]
         plt.figure(figsize=(6,6))
