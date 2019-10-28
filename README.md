@@ -15,13 +15,19 @@
        </ul>
   </li>
   <li> In order to install all packages we are going to use package-management system from python, pip (the easiest way to install packages).
-
+  <ol>
+    <li>
    Open the prompt and type the following commands (it can take some minutes to install each package).
 	
 	$ pip install jupyter
 	$ pip install genism
-	b.	In order to see if the packages are well installed, type:
+		
+   </li>
+       In order to see if the packages are well installed, type:
+
+	$ pip freeze
 	$ jupyter notebook
 	and open a browser in localhost:8000. If everything goes well, you must see the following output.
+   </li>
  </li>
  </ol>
