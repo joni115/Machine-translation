@@ -62,27 +62,25 @@ def save_model(path):
     w2v.save_model(path)
 
 
-def set_parameters_to_train(vector_size=300, min_count=1, window=10):
-    global w2v
-    w2v = Word2vec(vector_size, min_count, window)
-
-
-def train_model(corpus='cookbook', epochs=10):
+def train_model(nameCorpus='cookbook',
+                epochs=10,
+                vector_size=300,
+                min_count=1,
+                window=10):
     global w2v
 
     try:
-        corpus = utils.load_corpus(corpus)
+        print('loading corpus: {0}...\n'.format(nameCorpus))
+        corpus = utils.load_corpus(nameCorpus)
+        print('corpus already loaded\n')
     except NameError:
-        print('the corpus {0} is not available'.format(corpus))
+        print('the corpus {0} is not available'.format(nameCorpus))
         return
 
-    if not w2v:
-        w2v = Word2vec()
+    w2v = Word2vec(vector_size, min_count, window)
 
-    if w2v.get_vocabulary():
-        print('you have a model already trained. Please set parameter again or load a new model.')
-        return
     w2v.train(corpus, epochs=epochs)
+    print('The model with {0} corpus is trained'.format(nameCorpus))
     return w2v.model.wv
 
 
@@ -92,7 +90,7 @@ def load_model(path):
     try:
         w2v = Word2vec(path=path)
     except FileNotFoundError:
-        print("the file can't be founded")
+        print("the vectors can't be founded")
         return
     return w2v.model.wv
 
