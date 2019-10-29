@@ -79,6 +79,7 @@ def train_model(nameCorpus='cookbook',
 
     w2v = Word2vec(vector_size, min_count, window)
 
+    print('training... please wait\n')
     w2v.train(corpus, epochs=epochs)
     print('The model with {0} corpus is trained'.format(nameCorpus))
     return w2v.model.wv

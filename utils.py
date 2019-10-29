@@ -17,7 +17,7 @@ def read_zip(zipfile='text/cookbook_text.zip'):
 def read_file(filename='text'):
     with open(filename, 'r') as f:
         text = pre_proccess_line(f.read())
-    yield text
+    return text
 
 def read_files_in_directory(directory='text/shakespeare'):
     files = glob.glob(directory + '/*.txt')
@@ -39,7 +39,7 @@ def add_corpus(corpus, path):
         print('{} is not a valid file'.format(path))
         return
 
-    switcher[corpus] = lambda: read_file(path)
+    switcher[corpus] = lambda: [read_file(path)]
     print('corpus added.')
 
 switcher = {
