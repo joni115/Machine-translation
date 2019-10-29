@@ -1,5 +1,4 @@
 import utils
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -112,14 +111,14 @@ def get_similar_words(word, number=10):
     return most_similar
 
 
-def get_vocabulary(top=10):
+def get_vocabulary():
     global w2v
 
     if not w2v:
-        please('please train or load a model')
+        print('please train or load a model')
         return
 
-    return pd.DataFrame(w2v.get_vocabulary(), columns=['word']).head(top)
+    return w2v.get_vocabulary()
 
 
 def cosine_similarity_between_words(word1, word2):
