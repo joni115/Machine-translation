@@ -18,7 +18,7 @@ class Word2vec:
 
     def train(self, corpus, epochs=5):
         self.model.build_vocab(corpus)
-        self.model.train(corpus, total_examples=self.model.corpus_count, epochs=5)
+        self.model.train(corpus, total_examples=self.model.corpus_count, epochs=epochs)
 
     def save_model(self, path):
         self.model.save(path)
@@ -79,7 +79,7 @@ def train_model(nameCorpus='cookbook',
     w2v = Word2vec(vector_size, min_count, window)
 
     print('training... please wait\n')
-    w2v.train(corpus, epochs=epochs)
+    w2v.train(list(corpus), epochs=epochs)
     print('The model with {0} corpus is trained'.format(nameCorpus))
     return w2v.model.wv
 
