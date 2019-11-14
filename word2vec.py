@@ -76,10 +76,14 @@ def train_model(nameCorpus='cookbook',
         print('the corpus {0} is not available'.format(nameCorpus))
         return
 
-    w2v = Word2vec(vector_size, min_count, window)
+    corpus = list(corpus)
+    if not corpus:
+        print('The corpus is empty. There is nothing to train.')
+        return
 
+    w2v = Word2vec(vector_size, min_count, window)
     print('training... please wait\n')
-    w2v.train(list(corpus), epochs=epochs)
+    w2v.train(corpus, epochs=epochs)
     print('The model with {0} corpus is trained'.format(nameCorpus))
     return w2v.model.wv
 
