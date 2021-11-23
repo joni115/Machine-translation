@@ -24,7 +24,7 @@ def read_zip(zipfile='text/cookbook_text.zip'):
         yield pre_proccess_line(text)
 
 def read_file(filename='text'):
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding='utf-8-sig') as f:
         text = pre_process_file(f.readlines())
     return text
 
